@@ -421,7 +421,7 @@ public:
         return randomInt;
     }
 
-private:
+protected:
     std::array<uint64_t, 16> state;
     unsigned long position;
 
@@ -506,6 +506,47 @@ private:
 
     // You really shouldn't copy this class.
     PRNG(PRNG const&) = delete;
+};
+
+/**
+* @brief A specialisation of PRNG that can be used with the c++ stl distribution classes.
+* The template parameter specifies the type of integer to be generated. The type must be integral
+* and have a width of less than 64 bits.
+*/
+template<typename T>
+class LeadbetterGenerator : public PRNG
+{
+public:
+    using result_type = T;
+    
+    /**
+    * @brief Construct the generator
+    */
+    LeadbetterGenerator() : PRNG() {};
+    
+    /**
+    * @brief Generates a random long for the stl distributions
+    */
+    TEST_VIRTUAL T operator()() 
+    {
+        return static_cast<T>(xorshift1024());
+    }
+
+    /**
+    * @brief Returns the absolute maximum value that can be returned
+    */
+    TEST_VIRTUAL result_type max() const
+    {
+        return std::numeric_limits<T>::max();
+    }
+
+    /**
+    * @brief Returns the absolute minimum value that can be returned
+    */
+    TEST_VIRTUAL result_type min() const
+    {
+        return std::numeric_limits<T>::min();
+    }
 };
 
 #undef TEST_VIRTUAL
