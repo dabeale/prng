@@ -525,7 +525,7 @@ public:
     LeadbetterGenerator() : PRNG() {};
     
     /**
-    * @brief Generates a random long for the stl distributions
+    * @brief Generates a random T for the stl distributions
     */
     TEST_VIRTUAL T operator()() 
     {
@@ -535,7 +535,7 @@ public:
     /**
     * @brief Returns the absolute maximum value that can be returned
     */
-    TEST_VIRTUAL result_type max() const
+    TEST_VIRTUAL T max() const
     {
         return std::numeric_limits<T>::max();
     }
@@ -543,7 +543,7 @@ public:
     /**
     * @brief Returns the absolute minimum value that can be returned
     */
-    TEST_VIRTUAL result_type min() const
+    TEST_VIRTUAL T min() const
     {
         return std::numeric_limits<T>::min();
     }
