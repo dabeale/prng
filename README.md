@@ -46,7 +46,7 @@ The test suite only tests for implementation details, it makes no attempt to com
 For performance reasons the functions are only made virtual at test time to allow for mocks. To do this the TEST macro should be defined. If the PRNG include is below the gtest include (as is common convention) you won't need to set up any additional compilation flags.
 
 ## Integration with stl
-In order to use the generator with the c++ stl distributions, instantiate the LeadbetterGenerator class. For example, to use the discrete distribution do as follows,
+In order to use the generator with the c++ stl distributions, instantiate the LeadbetterGenerator class. For example, to use the discrete distribution, do as follows,
 ``` cpp
 LeadbetterGenerator<uint32_t> generator;
 std::discrete_distribution<uint32_t> distribution {2,2,1,1,1};
